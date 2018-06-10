@@ -1,0 +1,6 @@
+- hosts: gitea
+  connection: local
+  vars:
+    certbot_mail: test@local.com
+  roles:
+      - ansible-role-certbot

@@ -1,0 +1,15 @@
+- name: install certbot package
+  apt:
+    name: certbot
+    default_release: '{{ certbot_distribution|default(ansible_distribution_release) }}'
+    state: present
+  tags: certbot
+
+- name: create webroot path directory
+  file:
+    path: '{{ certbot_path }}'
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  tags: certbot

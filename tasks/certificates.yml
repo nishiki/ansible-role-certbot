@@ -1,0 +1,24 @@
+- name: check if certificate exist
+  stat:
+    path: '/etc/letsencrypt/live/{{ item }}'
+  with_items: '{{ certbot_domains }}'
+  register: st
+  tags: certbot
+
+- name: check if nginx is launch
+  stat:
+    path: /var/run/nginx.pid
+  register: ng
+  tags: certbot
+
+- name: create a new certificate
+  shell: 'certbot certonly -n --agree-tos -d {{ item.item }} -m {{ certbot_mail }} --webroot --webroot-path {{ certbot_path }} --rsa-key-size {{ certbot_key_size }}'
+  with_items: '{{ st.results }}'
+  when: role == 'master' and not item.stat.exists and ng.stat.exists
+  tags: certbot
+
+- name: create a new certificate (standalone)
+  shell: 'certbot certonly -n --agree-tos -d {{ item.item }} -m {{ certbot_mail }} --standalone --rsa-key-size {{ certbot_key_size }}'
+  with_items: '{{ st.results }}'
+  when: role == 'master' and not item.stat.exists and not ng.stat.exists
+  tags: certbot

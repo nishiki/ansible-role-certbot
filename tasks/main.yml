@@ -1,0 +1,7 @@
+- include_tasks: '{{ file }}.yml'
+  with_items:
+    - base
+    - certificates
+  loop_control:
+    loop_var: file
+  tags: certbot

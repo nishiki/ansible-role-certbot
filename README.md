@@ -13,11 +13,11 @@ None
 - `certbot_mail` - mail address used by let's encrypt to notify
 - `certbot_key_size` - private key size (default: `4096`)
 - `certbot_path` - path where certbot write temporary files(default: `/var/www/acme`)
-- `certbot_domains` - array with the domain name
+- `certbot_domains` - array with the domain name and command
+- `certbot_role` - string must be master or slave, if master generate the certificates
 
 ## How to use
 
- * Install:
 ```
 - hosts: git-server
   roles:

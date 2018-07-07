@@ -1,4 +1,5 @@
 certbot_mail: ssl@host.local
 certbot_key_size: 4096
 certbot_path: /var/www/acme
+certbot_role: master
 certbot_domains: []

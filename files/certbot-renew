@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+import configparser
+import os
+
+config = configparser.ConfigParser()
+config.read('/etc/letsencrypt/renew.cfg')
+
+for domain in os.environ['RENEWED_DOMAINS'].split(' '):
+  try:
+    os.system(config.get('default', domain))
+  except:
+    continue

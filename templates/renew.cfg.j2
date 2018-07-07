@@ -1,0 +1,4 @@
+[default]
+{% for domain in certbot_domains%}
+{{ domain.name }} = {{ domain.command }}
+{% endfor %}

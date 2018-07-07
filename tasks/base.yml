@@ -1,8 +1,11 @@
 - name: install certbot package
   apt:
-    name: certbot
+    name: '{{ item }}'
     default_release: '{{ certbot_distribution|default(ansible_distribution_release) }}'
     state: present
+  with_items:
+    - certbot
+    - cron
   tags: certbot
 
 - name: create webroot path directory
@@ -12,4 +15,32 @@
     group: root
     mode: 0755
     state: directory
+  tags: certbot
+
+- name: install certbot-renew binary
+  copy:
+    src: certbot-renew
+    dest: /usr/local/bin/certbot-renew
+    owner: root
+    group: root
+    mode: 0755
+  tags: certbot
+
+- name: install certbot renew configuration
+  template:
+    src: renew.cfg.j2
+    dest: /etc/letsencrypt/renew.cfg
+    owner: root
+    group: root
+    mode: 0644
+  tags: certbot
+
+- name: add certbot renew cron
+  lineinfile:
+    path: /etc/cron.d/certbot
+    owner: root
+    group: root
+    mode: 0644
+    regexp: '^0 */12 * * * root'
+    line: "0 */12 * * * root perl -e 'sleep int(rand(3600))' && certbot -q renew --renew-hook /usr/local/bin/certbot-renew"
   tags: certbot

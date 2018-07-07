@@ -14,11 +14,11 @@
 - name: create a new certificate
   shell: 'certbot certonly -n --agree-tos -d {{ item.item }} -m {{ certbot_mail }} --webroot --webroot-path {{ certbot_path }} --rsa-key-size {{ certbot_key_size }}'
   with_items: '{{ st.results }}'
-  when: (role == 'master' or item.item == ansible_hostname) and not item.stat.exists and ng.stat.exists
+  when: (role == 'master' or item.item == ansible_fqdn) and not item.stat.exists and ng.stat.exists
   tags: certbot
 
 - name: create a new certificate (standalone)
   shell: 'certbot certonly -n --agree-tos -d {{ item.item }} -m {{ certbot_mail }} --standalone --rsa-key-size {{ certbot_key_size }}'
   with_items: '{{ st.results }}'
-  when: (role == 'master' or item.item == ansible_hostname) and not item.stat.exists and not ng.stat.exists
+  when: (role == 'master' or item.item == ansible_fqdn) and not item.stat.exists and not ng.stat.exists
   tags: certbot

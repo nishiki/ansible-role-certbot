@@ -17,8 +17,6 @@ provisioner:
 platforms:
   - name: debian-9
     driver_config:
-      publish:
-        - 3000:3000
       image: nishiki/ansible:stretch
       command: /bin/systemd
       volume:

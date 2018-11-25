@@ -1,7 +1,5 @@
-- include_tasks: '{{ file }}.yml'
-  with_items:
-    - base
-    - certificates
-  loop_control:
-    loop_var: file
+- import_tasks: base.yml
+  tags: certbot
+
+- import_tasks: certificates.yml
   tags: certbot

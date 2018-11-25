@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Adrien Waksberg
+  description: Generate certificate SSL with certbot
+  license: Apache2
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+
+  galaxy_tags:
+    - certbot
+    - ssl
+    - https
+
+dependencies: []

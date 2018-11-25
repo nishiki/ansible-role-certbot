@@ -1,5 +1,6 @@
 # Ansible role: Certbot
 [![Version](https://img.shields.io/badge/latest_version-2.0.0-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-certbot/releases)
+[![Build Status](https://travis-ci.org/nishiki/ansible-role-certbot.svg?branch=master)](https://travis-ci.org/nishiki/ansible-role-certbot)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://git.yaegashi.fr/nishiki/ansible-role-certbot/src/branch/master/LICENSE)
 
 Generate certificate SSL with certbot.

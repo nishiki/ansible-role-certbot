@@ -6,6 +6,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ## [Unreleased]
 - fix: replace inline module to cron for renew cron
 - test: use new docker images
+- test: add tavis-ci to run tests
 
 ## [2.0.0] 2018-07-07
 - add renew hook script

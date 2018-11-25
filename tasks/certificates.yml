@@ -1,7 +1,7 @@
 - name: check if certificate exist
   stat:
     path: '/etc/letsencrypt/live/{{ item.name }}'
-  with_items: '{{ certbot_domains }}'
+  loop: '{{ certbot_domains }}'
   register: st
   tags: certbot
 
@@ -13,12 +13,12 @@
 
 - name: create a new certificate
   shell: 'certbot certonly -n --agree-tos -d {{ item.item.name }} -m {{ certbot_mail }} --webroot --webroot-path {{ certbot_path }} --rsa-key-size {{ certbot_key_size }}'
-  with_items: '{{ st.results }}'
+  loop: '{{ st.results }}'
   when: (certbot_role == 'master' or item.item.name == ansible_fqdn) and not item.stat.exists and ng.stat.exists
   tags: certbot
 
 - name: create a new certificate (standalone)
   shell: 'certbot certonly -n --agree-tos -d {{ item.item.name }} -m {{ certbot_mail }} --standalone --rsa-key-size {{ certbot_key_size }}'
-  with_items: '{{ st.results }}'
+  loop: '{{ st.results }}'
   when: (certbot_role == 'master' or item.item.name == ansible_fqdn) and not item.stat.exists and not ng.stat.exists
   tags: certbot

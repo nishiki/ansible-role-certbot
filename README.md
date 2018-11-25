@@ -7,7 +7,7 @@ Generate certificate SSL with certbot.
 
 ## Requirements
 
-* Ansible >= 2.4
+* Ansible >= 2.5
 * Debian Stretch
 
 ## Role variables

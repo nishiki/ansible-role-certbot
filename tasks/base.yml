@@ -1,11 +1,12 @@
 - name: install certbot package
   apt:
-    name: '{{ item }}'
+    name: '{{ packages }}'
     default_release: '{{ certbot_distribution|default(ansible_distribution_release) }}'
     state: present
-  with_items:
-    - certbot
-    - cron
+  vars:
+    packages:
+      - certbot
+      - cron
   tags: certbot
 
 - name: create webroot path directory

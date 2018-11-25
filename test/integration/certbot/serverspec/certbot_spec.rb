@@ -15,11 +15,15 @@ describe file('/var/www/acme') do
 end
 
 describe file('/etc/cron.d/certbot') do
+  it { should_not exist }
+end
+
+describe file('/var/spool/cron/crontabs/root') do
   it { should exist }
   it { should be_file }
-  it { should be_mode 644 }
+  it { should be_mode 600 }
   it { should be_owned_by 'root' }
-  it { should be_grouped_into 'root' }
+  it { should be_grouped_into 'crontab' }
   it { should contain '--renew-hook /usr/local/bin/certbot-renew' }
 end
 

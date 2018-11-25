@@ -35,12 +35,17 @@
     mode: 0644
   tags: certbot
 
-- name: add certbot renew cron
-  lineinfile:
+- name: remove old cerbot renew cron
+  file:
     path: /etc/cron.d/certbot
-    owner: root
-    group: root
-    mode: 0644
-    regexp: '^0 */12 * * * root'
-    line: "0 */12 * * * root perl -e 'sleep int(rand(3600))' && certbot -q renew --renew-hook /usr/local/bin/certbot-renew"
+    state: absent
+  tags: certbot
+
+- name: add certbot renew cron
+  cron:
+    name: certbot-renew
+    user: root
+    hour: '*/12'
+    minute: 0
+    job: perl -e 'sleep int(rand(3600))' && certbot -q renew --renew-hook /usr/local/bin/certbot-renew
   tags: certbot

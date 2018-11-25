@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- fix: replace inline module to cron for renew cron
 - test: use new docker images
 
 ## [2.0.0] 2018-07-07

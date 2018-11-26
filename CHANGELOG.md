@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- fix: replace shell module to command
 
 ## [2.1.0]
 - BREAKING CHANGE: minimal ansible version is 2.5 now

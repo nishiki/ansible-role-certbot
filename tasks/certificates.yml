@@ -1,3 +1,4 @@
+---
 - name: check if certificate exist
   stat:
     path: '/etc/letsencrypt/live/{{ item.name }}'

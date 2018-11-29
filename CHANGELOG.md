@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- test: add check yamllint
 
 ## [2.1.1] 2018-11-26
 - fix: replace shell module to command

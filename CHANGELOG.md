@@ -4,7 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+### Added
+
 - test: add check yamllint
+- test: add support debian 11
+
+### Changed
+
+- test: replace kitchen to molecule
+
+### Removed
+
+- test: remove support debian 9
 
 ## [2.1.1] 2018-11-26
 - fix: replace shell module to command

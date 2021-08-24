@@ -1,19 +1,19 @@
 ---
 - name: check if certificate exist
-  stat:
+  ansible.builtin.stat:
     path: '/etc/letsencrypt/live/{{ item.name }}'
   loop: '{{ certbot_domains }}'
   register: st
   tags: certbot
 
 - name: check if nginx is launch
-  stat:
+  ansible.builtin.stat:
     path: /var/run/nginx.pid
   register: ng
   tags: certbot
 
 - name: create a new certificate
-  command: >
+  ansible.builtin.command: >
     certbot certonly -n --agree-tos -d {{ item.item.name }} -m {{ certbot_mail }}
     --webroot --webroot-path {{ certbot_path }} --rsa-key-size {{ certbot_key_size }}
   loop: '{{ st.results }}'
@@ -21,7 +21,7 @@
   tags: certbot
 
 - name: create a new certificate (standalone)
-  command: >
+  ansible.builtin.command: >
     certbot certonly -n --agree-tos -d {{ item.item.name }} -m {{ certbot_mail }}
     --standalone --rsa-key-size {{ certbot_key_size }}
   loop: '{{ st.results }}'

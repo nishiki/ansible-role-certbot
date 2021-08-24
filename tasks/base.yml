@@ -1,17 +1,15 @@
 ---
 - name: install certbot package
-  apt:
-    name: '{{ packages }}'
-    default_release: '{{ certbot_distribution|default(ansible_distribution_release) }}'
-    state: present
-  vars:
-    packages:
+  ansible.builtin.apt:
+    name:
       - certbot
       - cron
+    default_release: '{{ certbot_distribution|default(ansible_distribution_release) }}'
+    state: present
   tags: certbot
 
 - name: create webroot path directory
-  file:
+  ansible.builtin.file:
     path: '{{ certbot_path }}'
     owner: root
     group: root
@@ -20,7 +18,7 @@
   tags: certbot
 
 - name: install certbot-renew binary
-  copy:
+  ansible.builtin.copy:
     src: certbot-renew
     dest: /usr/local/bin/certbot-renew
     owner: root
@@ -29,7 +27,7 @@
   tags: certbot
 
 - name: install certbot renew configuration
-  template:
+  ansible.builtin.template:
     src: renew.cfg.j2
     dest: /etc/letsencrypt/renew.cfg
     owner: root
@@ -38,16 +36,16 @@
   tags: certbot
 
 - name: remove old cerbot renew cron
-  file:
+  ansible.builtin.file:
     path: /etc/cron.d/certbot
     state: absent
   tags: certbot
 
 - name: add certbot renew cron
-  cron:
+  ansible.builtin.cron:
     name: certbot-renew
     user: root
     hour: '*/12'
-    minute: 0
+    minute: '0'
     job: perl -e 'sleep int(rand(3600))' && certbot -q renew --renew-hook /usr/local/bin/certbot-renew
   tags: certbot

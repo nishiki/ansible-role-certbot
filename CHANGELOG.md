@@ -13,6 +13,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ### Changed
 
 - test: replace kitchen to molecule
+- chore: use FQCN for module name
 
 ### Removed
 
